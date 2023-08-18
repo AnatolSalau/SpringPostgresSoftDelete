@@ -8,6 +8,9 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ProductService {
       @Autowired
@@ -24,12 +27,14 @@ public class ProductService {
             productRepository.deleteById(id);
       }
 
-      public Iterable<Product> findAll(boolean isDeleted){
+      public List<Product> findAll(boolean isDeleted){
             Session session = entityManager.unwrap(Session.class);
             Filter filter = session.enableFilter("deletedProductFilter");
             filter.setParameter("isDeleted", isDeleted);
             Iterable<Product> products =  productRepository.findAll();
+            List<Product> result = new ArrayList<Product>();
+            products.forEach(result::add);
             session.disableFilter("deletedProductFilter");
-            return products;
+            return result;
       }
 }

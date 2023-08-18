@@ -3,12 +3,14 @@ package com.example.springpostgressoftdelete.db.entity;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
 import org.hibernate.annotations.SQLDelete;
 
 @NoArgsConstructor
+@ToString
 
 @Entity
 @Table(name = "tbl_products")
