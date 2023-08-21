@@ -15,7 +15,7 @@ class ProductServiceTest {
       @Autowired
       private ProductService productService;
 
-      private Product product = new Product("Product2", 23.23);
+      private Product product = new Product("Product6", 555.23);
 
 
       @Test
@@ -25,12 +25,7 @@ class ProductServiceTest {
 
       @Test
       void remove() {
-            productService.remove(2L);
+            productService.remove(7L);
       }
 
-      @Test
-      void findAll() {
-            List<Product> all = productService.findAll(false);
-            System.err.println(all.toString());
-      }
 }

@@ -2,22 +2,15 @@ package com.example.springpostgressoftdelete.db.service;
 
 import com.example.springpostgressoftdelete.db.entity.Product;
 import com.example.springpostgressoftdelete.db.repository.ProductRepository;
-import jakarta.persistence.EntityManager;
-import org.hibernate.Filter;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Service
 public class ProductService {
       @Autowired
       private ProductRepository productRepository;
-
-      @Autowired
-      private EntityManager entityManager;
 
       public Product create(Product product) {
             return productRepository.save(product);
@@ -27,14 +20,4 @@ public class ProductService {
             productRepository.deleteById(id);
       }
 
-      public List<Product> findAll(boolean isDeleted){
-            Session session = entityManager.unwrap(Session.class);
-            Filter filter = session.enableFilter("deletedProductFilter");
-            filter.setParameter("isDeleted", isDeleted);
-            Iterable<Product> products =  productRepository.findAll();
-            List<Product> result = new ArrayList<Product>();
-            products.forEach(result::add);
-            session.disableFilter("deletedProductFilter");
-            return result;
-      }
 }

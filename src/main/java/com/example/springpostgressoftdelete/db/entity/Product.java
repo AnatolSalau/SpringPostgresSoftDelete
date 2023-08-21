@@ -16,12 +16,8 @@ import org.hibernate.annotations.SQLDelete;
 @Table(name = "tbl_products")
 @SequenceGenerator(sequenceName = "tbl_products_seq", name =
       "tbl_products_seq", allocationSize = 1)
-@SQLDelete(sql = "UPDATE tbl_products SET deleted = true WHERE id=?")
-@FilterDef(
-      name = "deletedProductFilter",
-      parameters = @ParamDef(name = "isDeleted", type = org.hibernate.type.descriptor.java.BooleanJavaType.class)
-)
-@Filter(name = "deletedProductFilter", condition = "deleted = :isDeleted")
+/*@SQLDelete(sql = "UPDATE tbl_products SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE tbl_products SET deleted = true WHERE name=?")*/
 public class Product {
       @Id
       @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =
